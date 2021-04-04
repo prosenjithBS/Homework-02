@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">HomeWorkSecond</string>
+    <string name="internet_title">Internet</string>
+    <string name="see_all_btn_text">See All</string>
+    <string name="e_shop_title">e-shop</string>
+    <string name="my_shortcuts_title">My Shortcuts</string>
+    <string name="tk">Tk.</string>
+    <string name="tk_amount">230.00</string>
+    <string name="recharge_validation">Valid Till 11 Nov 2021</string>
+    <string name="recharge_title">Recharge</string>
+    <string name="details_btn_text">Details</string>
+    <string name="product_title">Samsung S20 Ultra</string>
 </resources>

@@ -22,10 +22,10 @@
         app:layout_editor_absoluteY="38dp"
         app:srcCompat="@drawable/ic_globe" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:text="126.56"
@@ -33,7 +33,7 @@
         android:textSize="22sp"
         android:textStyle="bold" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,5 +51,6 @@
         android:textColor="#40A8B3"
         app:backgroundTint="@color/white"
         app:iconSize="@dimen/_5ssp"
-        app:iconTint="#009688" />
+        app:iconTint="#009688"
+        android:drawableEnd="@drawable/details_btn_icon" />
 </LinearLayout>

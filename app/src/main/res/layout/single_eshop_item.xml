@@ -8,7 +8,7 @@
     android:layout_marginRight="20dp"
     android:background="@drawable/balance_border">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/eshopProductImage"
         android:layout_width="@dimen/_135sdp"
         android:layout_height="@dimen/_90sdp"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/eshopProductImage"
         tools:layout_editor_absoluteX="0dp" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/eshopProductTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,14 +36,14 @@
         android:layout_marginLeft="28dp"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/roboto_bold"
-        android:text="Samsung S20 Ultra"
+        android:text="@string/product_title"
         android:textColor="#000000"
         android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
@@ -54,7 +54,7 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/eshopProductPrice"
         app:layout_constraintStart_toStartOf="@+id/eshopProductTitle" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView11"
         app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/eshopProductPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
         app:layout_constraintStart_toEndOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/eshopProductTitle" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/eshopProductViewBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
         app:strokeColor="#F7791E"
         app:strokeWidth="2dp" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/eshopProductPrice"
         app:layout_constraintStart_toEndOf="@+id/eshopProductPrice" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/eshopProductEmi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="@+id/textView12" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/eshopProductPrePrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -161,7 +161,7 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/textView14"
         app:layout_constraintStart_toEndOf="@+id/textView14" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/eshopProductSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -175,7 +175,7 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
         app:layout_constraintStart_toEndOf="@+id/textView11" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -189,7 +189,7 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/eshopProductSave"
         app:layout_constraintStart_toEndOf="@+id/eshopProductSave" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView4"
         android:layout_width="@dimen/_9sdp"
         android:layout_height="@dimen/_9sdp"

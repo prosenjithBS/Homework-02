@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="#FFFFFF">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/sliderImage"
         android:layout_width="wrap_content"
         android:layout_height="160dp"
@@ -16,5 +16,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/banner1"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitXY"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

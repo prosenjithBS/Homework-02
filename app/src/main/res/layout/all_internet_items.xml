@@ -4,19 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="65dp"
     android:background="@color/white"
-    android:paddingLeft="18dp">
+    app:paddingStart="18dp">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/roboto_regular"
-        android:text="e-shop"
+        android:text="@string/internet_title"
         android:textColor="#000000"
         android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
@@ -24,25 +24,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/eshopRV"
+        android:id="@+id/internetRV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
+        android:layout_marginLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        android:layout_marginStart="20dp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/eshopSellAllBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
         android:background="?android:attr/selectableItemBackground"
-        android:drawableRight="@drawable/ic_arrow_right"
         android:fontFamily="@font/roboto_bold"
-        android:text="See All"
+        android:text="@string/see_all_btn_text"
         android:textAllCaps="false"
         android:textColor="#40A8B3"
         android:textSize="@dimen/_9ssp"
@@ -51,5 +52,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eshopRV" />
+        app:layout_constraintTop_toBottomOf="@+id/internetRV"
+        android:drawableRight="@drawable/ic_arrow_right"
+        android:drawableEnd="@drawable/ic_arrow_right" />
 </androidx.constraintlayout.widget.ConstraintLayout>

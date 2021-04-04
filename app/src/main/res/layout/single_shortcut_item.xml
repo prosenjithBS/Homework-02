@@ -11,7 +11,7 @@
     android:paddingRight="5dp"
     android:paddingBottom="5dp">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/shortcutIcon"
         android:layout_width="@dimen/_21sdp"
         android:layout_height="@dimen/_21sdp"
@@ -23,7 +23,7 @@
         app:srcCompat="@drawable/update_profile"
         tools:ignore="VectorDrawableCompat" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/shortcutTitle"
         android:layout_width="@dimen/_60sdp"
         android:layout_height="wrap_content"

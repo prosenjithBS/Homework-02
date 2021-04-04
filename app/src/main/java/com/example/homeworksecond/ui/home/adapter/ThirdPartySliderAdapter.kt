@@ -1,4 +1,4 @@
-package com.example.homeworksecond.adapter
+package com.example.homeworksecond.ui.home.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,9 +10,10 @@ import com.smarteist.autoimageslider.SliderViewAdapter
 
 
 class ThirdPartySliderAdapter(
-    private val context: Context,
     private var mSliderModels: MutableList<SliderModel>
     ) : SliderViewAdapter<ThirdPartySliderAdapter.SliderAdapterVH>() {
+
+    private lateinit var context: Context
 
     fun renewItems(sliderItems: MutableList<SliderModel>) {
         mSliderModels = sliderItems
@@ -30,7 +31,8 @@ class ThirdPartySliderAdapter(
     }
 
    override fun onCreateViewHolder(parent: ViewGroup): SliderAdapterVH {
-        val binding= SingleSliderItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+       context=parent.context
+       val binding= SingleSliderItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return SliderAdapterVH(binding)
    }
 

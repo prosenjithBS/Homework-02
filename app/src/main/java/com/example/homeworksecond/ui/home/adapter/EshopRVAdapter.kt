@@ -1,4 +1,4 @@
-package com.example.homeworksecond.adapter
+package com.example.homeworksecond.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,9 +10,8 @@ class EshopRVAdapter(
         private val eshopProductList:ArrayList<EshopItemModel>
 ):RecyclerView.Adapter<EshopRVAdapter.EshopRVViewHolder>() {
 
-    inner class EshopRVViewHolder(val binding:SingleEshopItemBinding):RecyclerView.ViewHolder(binding.root){
+    inner class EshopRVViewHolder(val binding:SingleEshopItemBinding):RecyclerView.ViewHolder(binding.root)
 
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EshopRVViewHolder {
         val binding=SingleEshopItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)

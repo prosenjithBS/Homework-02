@@ -1,18 +1,19 @@
-package com.example.homeworksecond.data
+package com.example.homeworksecond.datasource
 
 import com.example.homeworksecond.R
 import com.example.homeworksecond.model.*
-import com.example.homeworksecond.utils.ViewType
+import com.example.homeworksecond.ui.home.adapter.HomeFragmentRVAdapter
+import javax.inject.Inject
 
-object DataSource {
+class LocalDataSource @Inject constructor(){
     val parentArrayList= arrayListOf(
-        ParentItemModel(ViewType.VIEW_TYPE_TOP_GREETING),
-        ParentItemModel(ViewType.VIEW_TYPE_SLIDER),
-        ParentItemModel(ViewType.VIEW_TYPE_RECHARGE),
-        ParentItemModel(ViewType.VIEW_TYPE_TOTAL_BALANCE),
-        ParentItemModel(ViewType.VIEW_TYPE_SHORTCUTS),
-        ParentItemModel(ViewType.VIEW_TYPE_ESHOP),
-        ParentItemModel(ViewType.VIEW_TYPE_INTERNET)
+        ParentItemModel(HomeFragmentRVAdapter.VIEW_TYPE_TOP_GREETING),
+        ParentItemModel(HomeFragmentRVAdapter.VIEW_TYPE_SLIDER),
+        ParentItemModel(HomeFragmentRVAdapter.VIEW_TYPE_RECHARGE),
+        ParentItemModel(HomeFragmentRVAdapter.VIEW_TYPE_TOTAL_BALANCE),
+        ParentItemModel(HomeFragmentRVAdapter.VIEW_TYPE_SHORTCUTS),
+        ParentItemModel(HomeFragmentRVAdapter.VIEW_TYPE_ESHOP),
+        ParentItemModel(HomeFragmentRVAdapter.VIEW_TYPE_INTERNET)
     )
 
     val sliderModelArrayList = arrayListOf(

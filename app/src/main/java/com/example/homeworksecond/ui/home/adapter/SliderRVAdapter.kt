@@ -1,4 +1,4 @@
-package com.example.homeworksecond.adapter
+package com.example.homeworksecond.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -25,4 +25,5 @@ class SliderRVAdapter (
     }
 
     override fun getItemCount() = sliderModelArrayList.size
+
 }
