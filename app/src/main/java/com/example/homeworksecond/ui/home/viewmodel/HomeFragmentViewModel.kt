@@ -6,66 +6,50 @@ import androidx.lifecycle.ViewModel
 import com.example.homeworksecond.data.HomeFragmentRepository
 import com.example.homeworksecond.data.HomeFragmentRepositoryImpl
 import com.example.homeworksecond.model.*
+import com.example.homeworksecond.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeFragmentViewModel @Inject constructor(private val homeFragmentRepository:HomeFragmentRepository) : ViewModel() {
+class HomeFragmentViewModel @Inject constructor(
+        private val homeFragmentRepository:HomeFragmentRepository) : ViewModel() {
 
-    private val parentArrayListLiveData = MutableLiveData<List<ParentItemModel>>()
+    private val _parentArrayListLiveData = MutableLiveData< Resource<List<ParentItemModel>>>()
     private val sliderModelArrayList = MutableLiveData<List<SliderModel>>()
     private val shortcutList = MutableLiveData<List<ShortcutModel>>()
     private val eshopItemList = MutableLiveData<List<EshopItemModel>>()
     private val internetItemList = MutableLiveData<List<InternetItemModel>>()
     private val compositeDisposable = CompositeDisposable()
 
+    init {
+        fetchParentArrayList()
+    }
 
-    fun getParentArrayList(): LiveData<List<ParentItemModel>> {
+    private fun fetchParentArrayList() {
         compositeDisposable.add(homeFragmentRepository.getParentArrayList()
+            .delay(2,TimeUnit.SECONDS)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(object : DisposableSingleObserver<MutableList<ParentItemModel>>() {
-                override fun onSuccess(t: MutableList<ParentItemModel>) {
-                    parentArrayListLiveData.value = t
-                }
-
-                override fun onError(e: Throwable?) {
-                    TODO("Not yet implemented")
-                }
-
+            .subscribe({
+                       _parentArrayListLiveData.postValue(Resource.success(it))
+            },{
+                _parentArrayListLiveData.postValue(Resource.error("Something went wrong!",null))
             })
         )
-
-        compositeDisposable.add(homeFragmentRepository.getParentArrayList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-
-                },{
-
-                })
-        )
-        return parentArrayListLiveData
     }
 
     fun getSliderModelArrayList(): LiveData<List<SliderModel>> {
         compositeDisposable.add(homeFragmentRepository.getSliderModelArrayList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<MutableList<SliderModel>>() {
-                    override fun onSuccess(t: MutableList<SliderModel>) {
-                        sliderModelArrayList.value = t
-                    }
-
-                    override fun onError(e: Throwable?) {
-                        TODO("Not yet implemented")
-                    }
-                })
-        )
+                .subscribe({
+                           sliderModelArrayList.postValue(it)
+                },{}))
         return sliderModelArrayList
     }
 
@@ -73,16 +57,9 @@ class HomeFragmentViewModel @Inject constructor(private val homeFragmentReposito
         compositeDisposable.add(homeFragmentRepository.getShortcutList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<MutableList<ShortcutModel>>(){
-                    override fun onSuccess(t: MutableList<ShortcutModel>) {
-                        shortcutList.value=t
-                    }
-
-                    override fun onError(e: Throwable?) {
-                        TODO("Not yet implemented")
-                    }
-
-                })
+                .subscribe({
+                           shortcutList.postValue(it)
+                },{})
         )
         return shortcutList
     }
@@ -91,34 +68,21 @@ class HomeFragmentViewModel @Inject constructor(private val homeFragmentReposito
         compositeDisposable.add(homeFragmentRepository.getEshopItemList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<MutableList<EshopItemModel>>(){
-                    override fun onSuccess(t: MutableList<EshopItemModel>) {
-                        eshopItemList.value = t
-                    }
-
-                    override fun onError(e: Throwable?) {
-                        TODO("Not yet implemented")
-                    }
-
-                })
+                .subscribe({
+                           eshopItemList.postValue(it)
+                },{})
         )
         return eshopItemList
     }
 
     fun getInternetItemList(): LiveData<List<InternetItemModel>> {
-        compositeDisposable.add(homeFragmentRepository.getInternetItemList()
-                .subscribeOn(Schedulers.io())
+        compositeDisposable.add(
+            homeFragmentRepository.getInternetItemList()
+            .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object :DisposableSingleObserver<MutableList<InternetItemModel>>(){
-                    override fun onSuccess(t: MutableList<InternetItemModel>) {
-                        internetItemList.value = t
-                    }
-
-                    override fun onError(e: Throwable?) {
-                        TODO("Not yet implemented")
-                    }
-
-                })
+                .subscribe ({
+                        internetItemList.value = it
+                    }, {})
         )
         return internetItemList
     }
@@ -126,5 +90,9 @@ class HomeFragmentViewModel @Inject constructor(private val homeFragmentReposito
 
     override fun onCleared() {
         compositeDisposable.dispose()
+    }
+
+    fun getParentArrayList() : LiveData<Resource<List<ParentItemModel>>>{
+        return _parentArrayListLiveData
     }
 }

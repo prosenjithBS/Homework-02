@@ -2,6 +2,7 @@ package com.example.homeworksecond.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homeworksecond.databinding.SingleEshopItemBinding
 import com.example.homeworksecond.databinding.SingleInternetItemBinding
@@ -9,11 +10,19 @@ import com.example.homeworksecond.databinding.SingleShortcutItemBinding
 import com.example.homeworksecond.model.EshopItemModel
 import com.example.homeworksecond.model.InternetItemModel
 import com.example.homeworksecond.model.ShortcutModel
+import com.example.homeworksecond.utils.GenericDiffUtil
 
-class GenericRecyclerViewAdapter<T>(
-        private val list:ArrayList<T>
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class GenericRVAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
+    private val list = ArrayList<T>()
+
+    fun addData(list: ArrayList<T>){
+        val diffCallback = GenericDiffUtil(this.list,list)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        this.list.clear()
+        this.list.addAll(list)
+        diffResult.dispatchUpdatesTo(this)
+    }
     companion object{
         const val VIEW_TYPE_SHORTCUTS = 1
         const val VIEW_TYPE_ESHOP = 2
@@ -39,7 +48,7 @@ class GenericRecyclerViewAdapter<T>(
         when(list[position]){
             is EshopItemModel -> {
                 val currentItem = list[position] as EshopItemModel
-                with((holder as GenericRecyclerViewAdapter<*>.EshopRVViewHolder).binding){
+                with((holder as GenericRVAdapter<*>.EshopRVViewHolder).binding){
                     eshopProductImage.setImageResource(currentItem.image)
                     eshopProductTitle.text=currentItem.title
                     eshopProductPrice.text=currentItem.price.toString()
@@ -50,7 +59,7 @@ class GenericRecyclerViewAdapter<T>(
             }
             is InternetItemModel -> {
                 val currentItem = list[position] as InternetItemModel
-                with((holder as GenericRecyclerViewAdapter<*>.InternetRVViewHolder).binding){
+                with((holder as GenericRVAdapter<*>.InternetRVViewHolder).binding){
                     internetData.text=currentItem.data.toString()+" GB"
                     internetExtraData.text=currentItem.extraData
                     internetPts.text=currentItem.pts.toString()
@@ -60,7 +69,7 @@ class GenericRecyclerViewAdapter<T>(
             }
             is ShortcutModel -> {
                 val currentItem = list[position] as ShortcutModel
-                with((holder as GenericRecyclerViewAdapter<*>.ShortcutRVViewHolder).binding){
+                with((holder as GenericRVAdapter<*>.ShortcutRVViewHolder).binding){
                     shortcutIcon.setImageResource(currentItem.shortcutIcon)
                     shortcutTitle.text=currentItem.title
                 }

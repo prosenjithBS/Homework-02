@@ -3,6 +3,7 @@ package com.example.homeworksecond.ui.home
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import com.example.homeworksecond.ui.home.adapter.HomeFragmentRVAdapter
 import com.example.homeworksecond.databinding.FragmentHomeBinding
 import com.example.homeworksecond.model.*
 import com.example.homeworksecond.ui.home.viewmodel.HomeFragmentViewModel
+import com.example.homeworksecond.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -20,7 +22,6 @@ class HomeFragment: Fragment() {
 
     private lateinit var homeFragmentRVAdapter:HomeFragmentRVAdapter
     private lateinit var binding:FragmentHomeBinding
-
     private val viewModel: HomeFragmentViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,8 +46,6 @@ class HomeFragment: Fragment() {
     }
 
     private fun setUpViewModel() {
-
-
         viewModel.getSliderModelArrayList().observe(viewLifecycleOwner, {
             homeFragmentRVAdapter.addData(it as ArrayList<SliderModel>)
         })
@@ -59,12 +58,32 @@ class HomeFragment: Fragment() {
         viewModel.getInternetItemList().observe(viewLifecycleOwner, {
             homeFragmentRVAdapter.addData(it as ArrayList<InternetItemModel>)
         })
-        viewModel.getParentArrayList().observe(viewLifecycleOwner, {
-            homeFragmentRVAdapter.addData(it as ArrayList<ParentItemModel>)
-        })
-
+        setUpParentArrayListObserver()
     }
 
+
+    private fun setUpParentArrayListObserver(){
+        viewModel.getParentArrayList().observe(viewLifecycleOwner, {
+            when(it.status){
+                Status.SUCCESS -> {
+                    binding.progressBar.visibility = View.GONE
+                    it.data?.let { parentArrayList ->
+                        homeFragmentRVAdapter.addData(parentArrayList as ArrayList<ParentItemModel>)
+                        homeFragmentRVAdapter.notifyDataSetChanged()
+                    }
+                    binding.homeFragmentRV.visibility = View.VISIBLE
+                }
+                Status.LOADING -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.homeFragmentRV.visibility = View.GONE
+                }
+                Status.ERROR -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        })
+    }
     private fun setUpToolbar(){
         val toolbar = binding.homeToolbar
         (activity as MainActivity).setSupportActionBar(toolbar)
@@ -73,7 +92,6 @@ class HomeFragment: Fragment() {
 
     private fun setUpRecyclerView(){
         homeFragmentRVAdapter = HomeFragmentRVAdapter()
-        homeFragmentRVAdapter.notifyDataSetChanged()
         binding.homeFragmentRV.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())

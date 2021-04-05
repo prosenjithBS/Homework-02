@@ -4,10 +4,13 @@ import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homeworksecond.databinding.*
 import com.example.homeworksecond.model.*
+import com.example.homeworksecond.utils.GenericDiffUtil
+import com.example.homeworksecond.utils.HomeFragmentDiffUtil
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
@@ -16,37 +19,45 @@ class HomeFragmentRVAdapter :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private lateinit var context:Context
     private val list = ArrayList<ParentItemModel>()
-    private val sliderModelArrayList = ArrayList<SliderModel>()
+    private val sliderItemList = ArrayList<SliderModel>()
     private val shortcutItemList = ArrayList<ShortcutModel>()
     private val eshopItemList = ArrayList<EshopItemModel>()
     private val internetItemList = ArrayList<InternetItemModel>()
 
-    fun <T>addData(arrayList: ArrayList<T>){
-        when(arrayList.firstOrNull()){
+    fun <T>addData(list: ArrayList<T>){
+        when(list.firstOrNull()){
             is ParentItemModel -> {
-                list.clear()
-                list.addAll(arrayList as ArrayList<ParentItemModel>)
-                notifyDataSetChanged()
+                val diffCallback = HomeFragmentDiffUtil(this.list,list as ArrayList<ParentItemModel>)
+                val diffResult = DiffUtil.calculateDiff(diffCallback)
+                this.list.clear()
+                this.list.addAll(list)
+                diffResult.dispatchUpdatesTo(this)
             }
             is SliderModel -> {
-                sliderModelArrayList.clear()
-                sliderModelArrayList.addAll(arrayList as ArrayList<SliderModel>)
+                sliderItemList.clear()
+                sliderItemList.addAll(list as ArrayList<SliderModel>)
                 notifyDataSetChanged()
             }
             is ShortcutModel -> {
-                shortcutItemList.clear()
-                shortcutItemList.addAll(arrayList as ArrayList<ShortcutModel>)
-                notifyDataSetChanged()
+                val diffCallback = GenericDiffUtil(shortcutItemList,list as ArrayList<ShortcutModel>)
+                val diffResult = DiffUtil.calculateDiff(diffCallback)
+                this.shortcutItemList.clear()
+                this.shortcutItemList.addAll(list)
+                diffResult.dispatchUpdatesTo(this)
             }
             is EshopItemModel -> {
-                eshopItemList.clear()
-                eshopItemList.addAll(arrayList as ArrayList<EshopItemModel>)
-                notifyDataSetChanged()
+                val diffCallback = GenericDiffUtil(eshopItemList,list as ArrayList<EshopItemModel>)
+                val diffResult = DiffUtil.calculateDiff(diffCallback)
+                this.eshopItemList.clear()
+                this.eshopItemList.addAll(list)
+                diffResult.dispatchUpdatesTo(this)
             }
             is InternetItemModel -> {
-                internetItemList.clear()
-                internetItemList.addAll(arrayList as ArrayList<InternetItemModel>)
-                notifyDataSetChanged()
+                val diffCallback = GenericDiffUtil(internetItemList,list as ArrayList<InternetItemModel>)
+                val diffResult = DiffUtil.calculateDiff(diffCallback)
+                this.internetItemList.clear()
+                this.internetItemList.addAll(list)
+                diffResult.dispatchUpdatesTo(this)
             }
 
         }
@@ -89,15 +100,15 @@ class HomeFragmentRVAdapter :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 //                with(holder as SliderViewHolder){
 //                    binding.sliderRV.layoutManager = layoutManager
 //                    binding.sliderRV.setHasFixedSize(true)
-//                    val sliderModelArrayList = DataSource.sliderModelArrayList
-//                    val sliderRVAdapter = SliderRVAdapter(sliderModelArrayList)
+//                    val sliderItemList = DataSource.sliderItemList
+//                    val sliderRVAdapter = SliderRVAdapter(sliderItemList)
 //                    binding.sliderRV.adapter=sliderRVAdapter
 //                }
 //            }
             VIEW_TYPE_SLIDER->{
                 with(holder as ThirdPartySliderViewHolder){
                     with(binding.imageSlider){
-                        setSliderAdapter(ThirdPartySliderAdapter(sliderModelArrayList))
+                        setSliderAdapter(ThirdPartySliderAdapter(sliderItemList))
                         setIndicatorAnimation(IndicatorAnimationType.WORM)
                         setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
                         startAutoCycle()
@@ -109,29 +120,18 @@ class HomeFragmentRVAdapter :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
                     }
                 }
             }
-
-//            VIEW_TYPE_SHORTCUTS->{
-//                val shortcutsRVAdapter = ShortcutsRVAdapter(shortcutItemList)
-//                shortcutsRVAdapter.notifyDataSetChanged()
-//                with((holder as ShortcutsViewHolder).binding){
-//                    shortcutsRV.layoutManager = layoutManager
-//                    shortcutsRV.setHasFixedSize(true)
-//                    shortcutsRV.adapter= shortcutsRVAdapter
-//                }
-//            }
             VIEW_TYPE_SHORTCUTS->{
-                val shortcutsRVAdapter = GenericRecyclerViewAdapter(shortcutItemList)
-                shortcutsRVAdapter.notifyDataSetChanged()
+                val shortcutsRVAdapter = GenericRVAdapter<ShortcutModel>()
+                shortcutsRVAdapter.addData(shortcutItemList)
                 with((holder as ShortcutsViewHolder).binding){
                     shortcutsRV.layoutManager = layoutManager
                     shortcutsRV.setHasFixedSize(true)
                     shortcutsRV.adapter= shortcutsRVAdapter
                 }
             }
-
             VIEW_TYPE_ESHOP ->{
-                val eshopRVAdapter = GenericRecyclerViewAdapter(eshopItemList)
-                eshopRVAdapter.notifyDataSetChanged()
+                val eshopRVAdapter = GenericRVAdapter<EshopItemModel>()
+                eshopRVAdapter.addData(eshopItemList)
                 with((holder as EshopViewHolder).binding){
                     eshopRV.layoutManager=layoutManager
                     eshopRV.setHasFixedSize(true)
@@ -139,8 +139,8 @@ class HomeFragmentRVAdapter :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
                 }
             }
             VIEW_TYPE_INTERNET ->{
-                val internetRVAdapter = GenericRecyclerViewAdapter(internetItemList)
-                internetRVAdapter.notifyDataSetChanged()
+                val internetRVAdapter = GenericRVAdapter<InternetItemModel>()
+                internetRVAdapter.addData(internetItemList)
                 with((holder as InternetViewHolder).binding){
                     internetRV.layoutManager=layoutManager
                     internetRV.setHasFixedSize(true)
@@ -156,10 +156,7 @@ class HomeFragmentRVAdapter :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private inner class TopGreetingViewHolder(val binding:TopGreetingBinding):RecyclerView.ViewHolder(binding.root)
 
-
-//    private inner class SliderViewHolder(val binding:SliderBinding):RecyclerView.ViewHolder(binding.root){
-//
-//    }
+//    private inner class SliderViewHolder(val binding:SliderBinding):RecyclerView.ViewHolder(binding.root)
 
     private inner class ThirdPartySliderViewHolder(val binding:SingleImageSliderThirdPartyBinding):RecyclerView.ViewHolder(binding.root)
 
