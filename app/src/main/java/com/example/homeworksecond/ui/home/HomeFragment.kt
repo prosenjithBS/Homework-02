@@ -40,7 +40,6 @@ class HomeFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpToolbar()
         setUpRecyclerView()
         setUpViewModel()
     }
@@ -84,11 +83,7 @@ class HomeFragment: Fragment() {
             }
         })
     }
-    private fun setUpToolbar(){
-        val toolbar = binding.homeToolbar
-        (activity as MainActivity).setSupportActionBar(toolbar)
-        toolbar.title="Banglalink"
-    }
+
 
     private fun setUpRecyclerView(){
         homeFragmentRVAdapter = HomeFragmentRVAdapter()
@@ -98,27 +93,5 @@ class HomeFragment: Fragment() {
             adapter = homeFragmentRVAdapter
         }
 
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
-        inflater.inflate(R.menu.menu_main, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.search -> {
-                Log.d("menus", "Search icon clicked!")
-                true
-            }
-            R.id.toggle -> {
-                Log.d("menus", "Toggle icon clicked!")
-                true
-            }
-            else -> {
-                Log.d("menus", "Notification icon clicked!")
-                true
-            }
-        }
     }
 }

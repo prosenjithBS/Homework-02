@@ -10,4 +10,6 @@
     <string name="recharge_title">Recharge</string>
     <string name="details_btn_text">Details</string>
     <string name="product_title">Samsung S20 Ultra</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
