@@ -8,8 +8,7 @@
     android:layout_marginRight="15dp"
     android:background="#FFFFFF"
     android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:paddingBottom="5dp">
+    android:paddingRight="5dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/shortcutIcon"
@@ -25,13 +24,16 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/shortcutTitle"
-        android:layout_width="@dimen/_60sdp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/nunito"
         android:gravity="center"
-        android:paddingBottom="10dp"
         android:text="Update Profile"
         android:textColor="#33455A"
         android:textSize="@dimen/_9ssp"
@@ -39,5 +41,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shortcutIcon" />
+        app:layout_constraintTop_toBottomOf="@+id/shortcutIcon"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
