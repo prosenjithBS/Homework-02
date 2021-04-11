@@ -23,12 +23,6 @@ class MainActivity : AppCompatActivity() {
         setUpToolbar()
         setUpBottomNavigationView()
 
-//        supportFragmentManager.commit {
-//            val homeScreen= HomeFragment()
-//            setReorderingAllowed(true)
-//            add(R.id.fragmentContainerView,homeScreen)
-//            //addToBackStack("all_movies")
-//        }
     }
 
     private fun setUpBottomNavigationView() {

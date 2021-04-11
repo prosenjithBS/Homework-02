@@ -12,17 +12,17 @@
         android:title="Feed"/>
 
     <item
-        android:id="@+id/storeIcon"
+        android:id="@+id/storeFragment"
         android:icon="@drawable/store_bottom_nav_icon"
         app:showAsAction="withText"
         android:title="Store"/>
     <item
-        android:id="@+id/manageIcon"
+        android:id="@+id/manageFragment"
         android:icon="@drawable/manage_bottom_nav_icon"
         app:showAsAction="withText"
         android:title="Manage"/>
     <item
-        android:id="@+id/menuIcon"
+        android:id="@+id/menusFragment"
         android:icon="@drawable/menu_bottom_nav_icon"
         app:showAsAction="withText"
         android:title="Menus"/>

@@ -6,15 +6,6 @@ import com.example.homeworksecond.ui.home.adapter.HomeFragmentRVAdapter
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(){
-    val parentArrayList= arrayListOf(
-        ParentItemModel(HomeFragmentRVAdapter.VIEW_TYPE_TOP_GREETING),
-        ParentItemModel(HomeFragmentRVAdapter.VIEW_TYPE_SLIDER),
-        ParentItemModel(HomeFragmentRVAdapter.VIEW_TYPE_RECHARGE),
-        ParentItemModel(HomeFragmentRVAdapter.VIEW_TYPE_TOTAL_BALANCE),
-        ParentItemModel(HomeFragmentRVAdapter.VIEW_TYPE_SHORTCUTS),
-        ParentItemModel(HomeFragmentRVAdapter.VIEW_TYPE_ESHOP),
-        ParentItemModel(HomeFragmentRVAdapter.VIEW_TYPE_INTERNET)
-    )
 
     val sliderModelArrayList = arrayListOf(
             SliderModel(R.drawable.banner1),

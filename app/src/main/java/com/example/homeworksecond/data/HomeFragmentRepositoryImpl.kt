@@ -8,10 +8,6 @@ import javax.inject.Inject
 
 class HomeFragmentRepositoryImpl @Inject constructor(private val localDataSource: LocalDataSource): HomeFragmentRepository {
 
-    override fun getParentArrayList(): Single<MutableList<ParentItemModel>>{
-        return localDataSource.parentArrayList.toObservable().toList()
-    }
-
     override fun getSliderModelArrayList(): Single<MutableList<SliderModel>> {
         return localDataSource.sliderModelArrayList.toObservable().toList()
     }

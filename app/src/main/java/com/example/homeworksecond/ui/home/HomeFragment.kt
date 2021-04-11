@@ -3,19 +3,14 @@ package com.example.homeworksecond.ui.home
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.homeworksecond.MainActivity
-import com.example.homeworksecond.R
 import com.example.homeworksecond.ui.home.adapter.HomeFragmentRVAdapter
 import com.example.homeworksecond.databinding.FragmentHomeBinding
 import com.example.homeworksecond.model.*
 import com.example.homeworksecond.ui.home.viewmodel.HomeFragmentViewModel
-import com.example.homeworksecond.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment: Fragment() {
@@ -45,45 +40,25 @@ class HomeFragment: Fragment() {
     }
 
     private fun setUpViewModel() {
+
         viewModel.getSliderModelArrayList().observe(viewLifecycleOwner, {
-            homeFragmentRVAdapter.addData(it as ArrayList<SliderModel>)
+            homeFragmentRVAdapter.addHomeItems(it as ArrayList<SliderModel>,2)
         })
+
         viewModel.getShortcutList().observe(viewLifecycleOwner, {
-            homeFragmentRVAdapter.addData(it as ArrayList<ShortcutModel>)
+            homeFragmentRVAdapter.addHomeItems(it as ArrayList<ShortcutModel>,5)
+
         })
+
         viewModel.getEshopItemList().observe(viewLifecycleOwner, {
-            homeFragmentRVAdapter.addData(it as ArrayList<EshopItemModel>)
+            homeFragmentRVAdapter.addHomeItems(it as ArrayList<EshopItemModel>,6)
         })
+
         viewModel.getInternetItemList().observe(viewLifecycleOwner, {
-            homeFragmentRVAdapter.addData(it as ArrayList<InternetItemModel>)
+            homeFragmentRVAdapter.addHomeItems(it as ArrayList<InternetItemModel>,7)
         })
-        setUpParentArrayListObserver()
+
     }
-
-
-    private fun setUpParentArrayListObserver(){
-        viewModel.getParentArrayList().observe(viewLifecycleOwner, {
-            when(it.status){
-                Status.SUCCESS -> {
-                    binding.progressBar.visibility = View.GONE
-                    it.data?.let { parentArrayList ->
-                        homeFragmentRVAdapter.addData(parentArrayList as ArrayList<ParentItemModel>)
-                        homeFragmentRVAdapter.notifyDataSetChanged()
-                    }
-                    binding.homeFragmentRV.visibility = View.VISIBLE
-                }
-                Status.LOADING -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                    binding.homeFragmentRV.visibility = View.GONE
-                }
-                Status.ERROR -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
-    }
-
 
     private fun setUpRecyclerView(){
         homeFragmentRVAdapter = HomeFragmentRVAdapter()
@@ -92,6 +67,5 @@ class HomeFragment: Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = homeFragmentRVAdapter
         }
-
     }
 }
